@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd /home/service
+cd /home/gate
 
 MAILBOX=${MAILBOX:-gate.ampq.service}
 GATE=${GATE:-/gate}
@@ -24,4 +24,5 @@ while [ $waiting -eq 1 ] ; do
 done
 
 echo "RabbitMQ is online. Starting the AMPQ service for $MAILBOX"
+
 java -jar gate-ampq-service.jar -g $GATE/$XGAPP -m $MAILBOX -s $RABBIT -u $USER -p $PASS -l $LOGDIR -f $LOGFILE -t $THREADS

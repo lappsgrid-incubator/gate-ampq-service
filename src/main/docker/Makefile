@@ -4,6 +4,7 @@ REPO=docker.lappsgrid.org
 GROUP=gate
 NAME=ampq-service
 IMAGE=$(REPO)/$(GROUP)/$(NAME)
+VERSION=$(shell cat VERSION)
 
 docker:
 	if [[ $(TARGET) -nt $(JAR) ]] ; then cp $(TARGET) . ; fi
@@ -17,4 +18,12 @@ stop:
 
 run:
 	docker run -it --rm $(IMAGE) /bin/bash
+
+push:
+	docker tag $(IMAGE) $(IMAGE)
+	docker push $(IMAGE)
+
+tag:
+	docker tag $(IMAGE) $(IMAGE):$(VERSION)
+	docker push $(IMAGE):$(VERSION)
 
